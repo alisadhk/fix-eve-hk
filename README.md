@@ -3,10 +3,10 @@
 <p align="center"><b>One-click script that frees VT-x so VMware can run nested virtualization</b></p>
 
 <p align="center">
-  ![Batch](https://img.shields.io/badge/Batch-script-4D4D4D)
-  ![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)
-  ![Updated](https://img.shields.io/badge/updated-2025-09-22-success)
-  [![Releases](https://img.shields.io/badge/downloads-Releases-blue)](https://github.com/alisadhk/fix-eve-hk/releases/latest)
+  <img src="https://img.shields.io/badge/Batch-script-4D4D4D" alt="Batch">
+  <img src="https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white" alt="Platform">
+  <img src="https://img.shields.io/badge/updated-2025--09--22-success" alt="Updated">
+  <a href="https://github.com/alisadhk/fix-eve-hk/releases/latest"><img src="https://img.shields.io/badge/downloads-Releases-blue" alt="Releases"></a>
 </p>
 
 ---
@@ -21,6 +21,20 @@ Windows features such as Hyper-V, VBS and Device Guard take over the CPU virtual
 - Turns off VBS / Device Guard / Credential Guard policies
 - Guides you through the manual Tamper Protection and Memory Integrity steps
 - Post-check and optional full shutdown
+- Seven clearly labeled steps, each printed on screen before it runs
+- Works on Windows 10/11 with VMware Workstation and EVE-NG labs
+
+## How it works
+- **Step 1** reads the current state with systeminfo.
+- **Step 2** sets hypervisorlaunchtype and smlaunchtype to off with cdedit.
+- **Step 3** disables the Hyper-V and Hypervisor Platform optional features with DISM.
+- **Step 4** stops and disables the vmcompute, vmms and HvHost services.
+- **Step 5** writes the registry policies that turn off VBS, Device Guard and Credential Guard.
+- **Steps 6-7** re-check the state and ask for a full shutdown, which is required for the changes to apply.
+
+## Requirements
+- Windows 10/11 and an Administrator account.
+- VMware Workstation (the target of the fix).
 
 ## Screenshots
 <p align="center"><img src="screenshots/screenshot-1.png" alt="Fix EVE HK screenshot" width="720"></p>
@@ -48,6 +62,11 @@ Download the script from this repository and run it as described in **How to use
 
 ## Configuration and privacy
 - The script contains no credentials or personal data.
+
+## Troubleshooting
+- Still shows a hypervisor: use **Shut down**, not Restart, then power on again.
+- Memory Integrity still on: turn it off in Windows Security > Device security > Core isolation.
+- To undo: run cdedit /set hypervisorlaunchtype auto and re-enable the Hyper-V feature in Windows Features.
 
 
 
